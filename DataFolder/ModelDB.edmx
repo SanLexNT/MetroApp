@@ -1,0 +1,518 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище DBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Depot">
+          <Key>
+            <PropertyRef Name="IdDepot" />
+          </Key>
+          <Property Name="IdDepot" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameDepot" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="IdMetroLine" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MetroLine">
+          <Key>
+            <PropertyRef Name="IdMetroLines" />
+          </Key>
+          <Property Name="IdMetroLines" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameMetroLines" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="IdRole" />
+          </Key>
+          <Property Name="IdRole" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameRole" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="IdStaff" />
+          </Key>
+          <Property Name="IdStaff" Type="int" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="NameStaff" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="IdDepot" Type="int" Nullable="false" />
+          <Property Name="DateOfBitrh" Type="date" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="IdStatus" />
+          </Key>
+          <Property Name="IdStatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameStatus" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeTrain">
+          <Key>
+            <PropertyRef Name="IdTypeTrain" />
+          </Key>
+          <Property Name="IdTypeTrain" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumberTypeTrain" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NameTypeTrain" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="35" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="35" Nullable="false" />
+          <Property Name="IdRole" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VanTrain">
+          <Key>
+            <PropertyRef Name="IdVanTrain" />
+          </Key>
+          <Property Name="IdVanTrain" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="YearOfRelease" Type="date" Nullable="false" />
+          <Property Name="IdDepot" Type="int" Nullable="false" />
+          <Property Name="IdStatus" Type="int" Nullable="false" />
+          <Property Name="IdTypeTrain" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Depot_MetroLine">
+          <End Role="MetroLine" Type="Self.MetroLine" Multiplicity="1" />
+          <End Role="Depot" Type="Self.Depot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MetroLine">
+              <PropertyRef Name="IdMetroLines" />
+            </Principal>
+            <Dependent Role="Depot">
+              <PropertyRef Name="IdMetroLine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Depot">
+          <End Role="Depot" Type="Self.Depot" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depot">
+              <PropertyRef Name="IdDepot" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="IdDepot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="IdRole" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VanTrain_Depot">
+          <End Role="Depot" Type="Self.Depot" Multiplicity="1" />
+          <End Role="VanTrain" Type="Self.VanTrain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depot">
+              <PropertyRef Name="IdDepot" />
+            </Principal>
+            <Dependent Role="VanTrain">
+              <PropertyRef Name="IdDepot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VanTrain_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="VanTrain" Type="Self.VanTrain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="IdStatus" />
+            </Principal>
+            <Dependent Role="VanTrain">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VanTrain_TypeTrain">
+          <End Role="TypeTrain" Type="Self.TypeTrain" Multiplicity="1" />
+          <End Role="VanTrain" Type="Self.VanTrain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeTrain">
+              <PropertyRef Name="IdTypeTrain" />
+            </Principal>
+            <Dependent Role="VanTrain">
+              <PropertyRef Name="IdTypeTrain" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище DBModelContainer">
+          <EntitySet Name="Depot" EntityType="Self.Depot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MetroLine" EntityType="Self.MetroLine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeTrain" EntityType="Self.TypeTrain" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VanTrain" EntityType="Self.VanTrain" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Depot_MetroLine" Association="Self.FK_Depot_MetroLine">
+            <End Role="MetroLine" EntitySet="MetroLine" />
+            <End Role="Depot" EntitySet="Depot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Depot" Association="Self.FK_Staff_Depot">
+            <End Role="Depot" EntitySet="Depot" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_User" Association="Self.FK_Staff_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VanTrain_Depot" Association="Self.FK_VanTrain_Depot">
+            <End Role="Depot" EntitySet="Depot" />
+            <End Role="VanTrain" EntitySet="VanTrain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VanTrain_Status" Association="Self.FK_VanTrain_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="VanTrain" EntitySet="VanTrain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VanTrain_TypeTrain" Association="Self.FK_VanTrain_TypeTrain">
+            <End Role="TypeTrain" EntitySet="TypeTrain" />
+            <End Role="VanTrain" EntitySet="VanTrain" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Depot">
+          <Key>
+            <PropertyRef Name="IdDepot" />
+          </Key>
+          <Property Name="IdDepot" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameDepot" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdMetroLine" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MetroLine" Relationship="Self.FK_Depot_MetroLine" FromRole="Depot" ToRole="MetroLine" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_Depot" FromRole="Depot" ToRole="Staff" />
+          <NavigationProperty Name="VanTrain" Relationship="Self.FK_VanTrain_Depot" FromRole="Depot" ToRole="VanTrain" />
+        </EntityType>
+        <EntityType Name="MetroLine">
+          <Key>
+            <PropertyRef Name="IdMetroLines" />
+          </Key>
+          <Property Name="IdMetroLines" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameMetroLines" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Depot" Relationship="Self.FK_Depot_MetroLine" FromRole="MetroLine" ToRole="Depot" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="IdRole" />
+          </Key>
+          <Property Name="IdRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameRole" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="IdStaff" />
+          </Key>
+          <Property Name="IdStaff" Type="Int32" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameStaff" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdDepot" Type="Int32" Nullable="false" />
+          <Property Name="DateOfBitrh" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Depot" Relationship="Self.FK_Staff_Depot" FromRole="Staff" ToRole="Depot" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Staff_User" FromRole="Staff" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="IdStatus" />
+          </Key>
+          <Property Name="IdStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameStatus" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="VanTrain" Relationship="Self.FK_VanTrain_Status" FromRole="Status" ToRole="VanTrain" />
+        </EntityType>
+        <EntityType Name="TypeTrain">
+          <Key>
+            <PropertyRef Name="IdTypeTrain" />
+          </Key>
+          <Property Name="IdTypeTrain" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumberTypeTrain" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameTypeTrain" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="VanTrain" Relationship="Self.FK_VanTrain_TypeTrain" FromRole="TypeTrain" ToRole="VanTrain" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdRole" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_User" FromRole="User" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="VanTrain">
+          <Key>
+            <PropertyRef Name="IdVanTrain" />
+          </Key>
+          <Property Name="IdVanTrain" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SerialNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="YearOfRelease" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdDepot" Type="Int32" Nullable="false" />
+          <Property Name="IdStatus" Type="Int32" Nullable="false" />
+          <Property Name="IdTypeTrain" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Depot" Relationship="Self.FK_VanTrain_Depot" FromRole="VanTrain" ToRole="Depot" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_VanTrain_Status" FromRole="VanTrain" ToRole="Status" />
+          <NavigationProperty Name="TypeTrain" Relationship="Self.FK_VanTrain_TypeTrain" FromRole="VanTrain" ToRole="TypeTrain" />
+        </EntityType>
+        <Association Name="FK_Depot_MetroLine">
+          <End Role="MetroLine" Type="Self.MetroLine" Multiplicity="1" />
+          <End Role="Depot" Type="Self.Depot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MetroLine">
+              <PropertyRef Name="IdMetroLines" />
+            </Principal>
+            <Dependent Role="Depot">
+              <PropertyRef Name="IdMetroLine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Depot">
+          <End Role="Depot" Type="Self.Depot" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depot">
+              <PropertyRef Name="IdDepot" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="IdDepot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VanTrain_Depot">
+          <End Role="Depot" Type="Self.Depot" Multiplicity="1" />
+          <End Role="VanTrain" Type="Self.VanTrain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depot">
+              <PropertyRef Name="IdDepot" />
+            </Principal>
+            <Dependent Role="VanTrain">
+              <PropertyRef Name="IdDepot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="IdRole" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IdUser" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VanTrain_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="VanTrain" Type="Self.VanTrain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="IdStatus" />
+            </Principal>
+            <Dependent Role="VanTrain">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VanTrain_TypeTrain">
+          <End Role="TypeTrain" Type="Self.TypeTrain" Multiplicity="1" />
+          <End Role="VanTrain" Type="Self.VanTrain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeTrain">
+              <PropertyRef Name="IdTypeTrain" />
+            </Principal>
+            <Dependent Role="VanTrain">
+              <PropertyRef Name="IdTypeTrain" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Depot" EntityType="Self.Depot" />
+          <EntitySet Name="MetroLine" EntityType="Self.MetroLine" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="TypeTrain" EntityType="Self.TypeTrain" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="VanTrain" EntityType="Self.VanTrain" />
+          <AssociationSet Name="FK_Depot_MetroLine" Association="Self.FK_Depot_MetroLine">
+            <End Role="MetroLine" EntitySet="MetroLine" />
+            <End Role="Depot" EntitySet="Depot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Depot" Association="Self.FK_Staff_Depot">
+            <End Role="Depot" EntitySet="Depot" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VanTrain_Depot" Association="Self.FK_VanTrain_Depot">
+            <End Role="Depot" EntitySet="Depot" />
+            <End Role="VanTrain" EntitySet="VanTrain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_User" Association="Self.FK_Staff_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VanTrain_Status" Association="Self.FK_VanTrain_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="VanTrain" EntitySet="VanTrain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VanTrain_TypeTrain" Association="Self.FK_VanTrain_TypeTrain">
+            <End Role="TypeTrain" EntitySet="TypeTrain" />
+            <End Role="VanTrain" EntitySet="VanTrain" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DBModelContainer" CdmEntityContainer="DBEntities">
+          <EntitySetMapping Name="Depot">
+            <EntityTypeMapping TypeName="DBModel.Depot">
+              <MappingFragment StoreEntitySet="Depot">
+                <ScalarProperty Name="IdDepot" ColumnName="IdDepot" />
+                <ScalarProperty Name="NameDepot" ColumnName="NameDepot" />
+                <ScalarProperty Name="IdMetroLine" ColumnName="IdMetroLine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MetroLine">
+            <EntityTypeMapping TypeName="DBModel.MetroLine">
+              <MappingFragment StoreEntitySet="MetroLine">
+                <ScalarProperty Name="IdMetroLines" ColumnName="IdMetroLines" />
+                <ScalarProperty Name="NameMetroLines" ColumnName="NameMetroLines" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="DBModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+                <ScalarProperty Name="NameRole" ColumnName="NameRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staff">
+            <EntityTypeMapping TypeName="DBModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="IdStaff" ColumnName="IdStaff" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="NameStaff" ColumnName="NameStaff" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="IdDepot" ColumnName="IdDepot" />
+                <ScalarProperty Name="DateOfBitrh" ColumnName="DateOfBitrh" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="DBModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="NameStatus" ColumnName="NameStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeTrain">
+            <EntityTypeMapping TypeName="DBModel.TypeTrain">
+              <MappingFragment StoreEntitySet="TypeTrain">
+                <ScalarProperty Name="IdTypeTrain" ColumnName="IdTypeTrain" />
+                <ScalarProperty Name="NumberTypeTrain" ColumnName="NumberTypeTrain" />
+                <ScalarProperty Name="NameTypeTrain" ColumnName="NameTypeTrain" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="DBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VanTrain">
+            <EntityTypeMapping TypeName="DBModel.VanTrain">
+              <MappingFragment StoreEntitySet="VanTrain">
+                <ScalarProperty Name="IdVanTrain" ColumnName="IdVanTrain" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="YearOfRelease" ColumnName="YearOfRelease" />
+                <ScalarProperty Name="IdDepot" ColumnName="IdDepot" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="IdTypeTrain" ColumnName="IdTypeTrain" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
