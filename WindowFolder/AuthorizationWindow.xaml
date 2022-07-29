@@ -16,7 +16,7 @@
                          materialDesign:ShadowAssist.ShadowDepth="Depth4">
         <Grid Margin="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="120"/>
                 <RowDefinition Height="75"/>
                 <RowDefinition Height="75"/>
@@ -30,7 +30,6 @@
                         Style="{DynamicResource MinimizedButtonStyle}"
                         Click="MinimizedBtn_Click"/>
                 <Button x:Name="ExitBtn"
-                        Margin="10 0 0 0"
                         Style="{DynamicResource ExitButtonStyle}"
                         Click="ExitBtn_Click"/>
             </StackPanel>

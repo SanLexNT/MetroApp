@@ -100,7 +100,20 @@ namespace MetroApp.WindowFolder
                         case 1:
                             MessageBoxClass.InfoMessageBox("Админ");
                             break;
+                        case 2:
+                            var staff = DBEntities.GetContext().Staff.FirstOrDefault(s => s.IdUser == user.IdUser);
+                            if (staff == null)
+                                MessageBoxClass.ErrorMessageBox("Сотрудник не найден!");
+                            else
+                            {
+                                VariableClass.IdDepot = staff.IdDepot;
+                                VariableClass.IdStaff = staff.IdStaff;
+                                new StaffWindowFolder.StaffMainWindow().Show();
+                                Close();
+                            }
+                            break;
                         default:
+                            MessageBoxClass.ErrorMessageBox("Неизвестный пользователь");
                             break;
                     }
                 }
@@ -118,6 +131,6 @@ namespace MetroApp.WindowFolder
             if (File.Exists(VariableClass.PATH))
                 File.Delete(VariableClass.PATH);
         }
-       
+
     }
 }

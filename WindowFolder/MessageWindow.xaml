@@ -36,13 +36,6 @@
                            Text="Message Title"/>
             </StackPanel>
         </materialDesign:Card>
-        <Button x:Name="ExitButton"
-                Click="ExitButton_Click"
-                BorderBrush="{Binding ElementName=CardHeader, Path=Background}"
-                Foreground="{Binding ElementName=CardHeader, Path=Background}"
-                Grid.Column="1"
-                Margin="0 0 15 0"
-                Style="{DynamicResource ExitButtonStyle}"/>
         <Grid Grid.Row="1"
               Grid.ColumnSpan="2">
             <Grid.RowDefinitions>

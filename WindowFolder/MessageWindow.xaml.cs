@@ -58,12 +58,6 @@ namespace MetroApp.WindowFolder
             }
         }
 
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            VariableClass.IsAccepted = false;
-            Close();
-        }
-
         //Обработка кнопки ОК для ошибки и информации
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {

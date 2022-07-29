@@ -14,6 +14,12 @@ namespace MetroApp.DataFolder
     
     public partial class Staff
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Staff()
+        {
+            this.Report = new HashSet<Report>();
+        }
+    
         public int IdStaff { get; set; }
         public string Surname { get; set; }
         public string NameStaff { get; set; }
@@ -21,9 +27,11 @@ namespace MetroApp.DataFolder
         public int IdDepot { get; set; }
         public System.DateTime DateOfBitrh { get; set; }
         public byte[] Photo { get; set; }
-        public int IdUser { get; set; }
+        public Nullable<int> IdUser { get; set; }
     
         public virtual Depot Depot { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Report> Report { get; set; }
         public virtual User User { get; set; }
     }
 }

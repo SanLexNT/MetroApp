@@ -1,0 +1,124 @@
+﻿<Page x:Class="MetroApp.PageFolder.StaffPageFolder.TrainListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MetroApp.PageFolder.StaffPageFolder"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="440" d:DesignWidth="610"
+      Title="Список поездов">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="ReportBtn"
+                    Style="{DynamicResource MainButtonStyle}"
+                    Width="35"
+                    Margin="10">
+                <Button.Content>
+                    <materialDesign:PackIcon Kind="BookPlusOutline"
+                                             Height="35"
+                                             Width="35"/>
+                </Button.Content>
+                <Button.ToolTip>
+                    <ToolTip>
+                        Добавить отчет
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+            <TextBox x:Name="SearchTb"
+                     Style="{DynamicResource TextBoxStyle}"
+                     Margin="210 0 0 0"
+                     Height="50"
+                     FontSize="14"
+                     TextChanged="SearchTb_TextChanged"
+                     materialDesign:HintAssist.Hint="Введите поисковый запрос"/>
+        </StackPanel>
+        <DataGrid x:Name="TrainDg"
+                  Grid.Row="1"
+                  Style="{DynamicResource DataGridStyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Номер"
+                                    Binding="{Binding SerialNumber}"
+                                    Width="*"/>
+                <DataGridTextColumn Header="Выпуск"
+                                    Binding="{Binding YearOfRelease, StringFormat=\{0:yyyy\}}"
+                                    Width="*"/>
+                <DataGridTextColumn Header="Статус"
+                                    Binding="{Binding Status.NameStatus}"
+                                    Width="*"/>
+                <DataGridTextColumn Header="Тип"
+                                    Binding="{Binding TypeTrain.NumberTypeTrain}"
+                                    Width="*"/>
+                <DataGridTextColumn Header="Название"
+                                    Binding="{Binding TypeTrain.NameTypeTrain}"
+                                    Width="*"/>
+            </DataGrid.Columns>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Background" Value="{Binding StatusColor}"/>
+                </Style>
+            </DataGrid.CellStyle>
+        </DataGrid>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="2">
+            <Button x:Name="ToFirstBtn"
+                    Style="{DynamicResource MainButtonStyle}"
+                    Height="35"
+                    Width="35"
+                    Margin="10"
+                    Click="ToFirstBtn_Click">
+                <Button.Content>
+                    <materialDesign:PackIcon Kind="ChevronDoubleLeft"
+                                             Height="35"
+                                             Width="35"/>
+                </Button.Content>
+            </Button>
+            <Button x:Name="PreviousBtn"
+                    Style="{DynamicResource MainButtonStyle}"
+                    Height="35"
+                    Width="35"
+                    Margin="0 10"
+                    Click="PreviousBtn_Click">
+                <Button.Content>
+                    <materialDesign:PackIcon Kind="ChevronLeft"
+                                             Height="35"
+                                             Width="35"/>
+                </Button.Content>
+            </Button>
+            <Label x:Name="lblNumberPage"
+                   Style="{DynamicResource LabelStyle}"
+                   Margin="10"
+                   Content="N/N"/>
+            <Button x:Name="NextBtn"
+                    Style="{DynamicResource MainButtonStyle}"
+                    Height="35"
+                    Width="35"
+                    Margin="0 10"
+                    Click="NextBtn_Click">
+                <Button.Content>
+                    <materialDesign:PackIcon Kind="ChevronRight"
+                                             Height="35"
+                                             Width="35"/>
+                </Button.Content>
+            </Button>
+            <Button x:Name="ToLastBtn"
+                    Style="{DynamicResource MainButtonStyle}"
+                    Height="35"
+                    Width="35"
+                    Margin="10 0"
+                    Click="ToLastBtn_Click">
+                <Button.Content>
+                    <materialDesign:PackIcon Kind="ChevronDoubleRight"
+                                             Height="35"
+                                             Width="35"/>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>
