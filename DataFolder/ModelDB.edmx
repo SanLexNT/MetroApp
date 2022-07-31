@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище MetroDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище DBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Depot">
           <Key>
             <PropertyRef Name="IdDepot" />
@@ -64,16 +64,6 @@
           </Key>
           <Property Name="IdStatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NameStatus" Type="nvarchar" MaxLength="30" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TypeTrain">
           <Key>
@@ -211,14 +201,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище MetroDBModelContainer">
+        <EntityContainer Name="Хранилище DBModelContainer">
           <EntitySet Name="Depot" EntityType="Self.Depot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MetroLine" EntityType="Self.MetroLine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeTrain" EntityType="Self.TypeTrain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VanTrain" EntityType="Self.VanTrain" Schema="dbo" store:Type="Tables" />
@@ -269,7 +258,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="MetroDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Depot">
           <Key>
             <PropertyRef Name="IdDepot" />
@@ -329,16 +318,6 @@
           <Property Name="IdStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NameStatus" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="VanTrain" Relationship="Self.FK_VanTrain_Status" FromRole="Status" ToRole="VanTrain" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TypeTrain">
           <Key>
@@ -469,7 +448,6 @@
           <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="Staff" EntityType="Self.Staff" />
           <EntitySet Name="Status" EntityType="Self.Status" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TypeTrain" EntityType="Self.TypeTrain" />
           <EntitySet Name="User" EntityType="Self.User" />
           <EntitySet Name="VanTrain" EntityType="Self.VanTrain" />
@@ -511,9 +489,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище MetroDBModelContainer" CdmEntityContainer="DBEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DBModelContainer" CdmEntityContainer="DBEntities">
           <EntitySetMapping Name="Depot">
-            <EntityTypeMapping TypeName="MetroDBModel.Depot">
+            <EntityTypeMapping TypeName="DBModel.Depot">
               <MappingFragment StoreEntitySet="Depot">
                 <ScalarProperty Name="IdDepot" ColumnName="IdDepot" />
                 <ScalarProperty Name="NameDepot" ColumnName="NameDepot" />
@@ -521,7 +499,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MetroLine">
-            <EntityTypeMapping TypeName="MetroDBModel.MetroLine">
+            <EntityTypeMapping TypeName="DBModel.MetroLine">
               <MappingFragment StoreEntitySet="MetroLine">
                 <ScalarProperty Name="IdMetroLines" ColumnName="IdMetroLines" />
                 <ScalarProperty Name="NameMetroLines" ColumnName="NameMetroLines" />
@@ -529,7 +507,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Report">
-            <EntityTypeMapping TypeName="MetroDBModel.Report">
+            <EntityTypeMapping TypeName="DBModel.Report">
               <MappingFragment StoreEntitySet="Report">
                 <ScalarProperty Name="IdReport" ColumnName="IdReport" />
                 <ScalarProperty Name="TextReport" ColumnName="TextReport" />
@@ -539,7 +517,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="MetroDBModel.Role">
+            <EntityTypeMapping TypeName="DBModel.Role">
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="IdRole" ColumnName="IdRole" />
                 <ScalarProperty Name="NameRole" ColumnName="NameRole" />
@@ -547,7 +525,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Staff">
-            <EntityTypeMapping TypeName="MetroDBModel.Staff">
+            <EntityTypeMapping TypeName="DBModel.Staff">
               <MappingFragment StoreEntitySet="Staff">
                 <ScalarProperty Name="IdStaff" ColumnName="IdStaff" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
@@ -561,26 +539,15 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Status">
-            <EntityTypeMapping TypeName="MetroDBModel.Status">
+            <EntityTypeMapping TypeName="DBModel.Status">
               <MappingFragment StoreEntitySet="Status">
                 <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
                 <ScalarProperty Name="NameStatus" ColumnName="NameStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="MetroDBModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TypeTrain">
-            <EntityTypeMapping TypeName="MetroDBModel.TypeTrain">
+            <EntityTypeMapping TypeName="DBModel.TypeTrain">
               <MappingFragment StoreEntitySet="TypeTrain">
                 <ScalarProperty Name="IdTypeTrain" ColumnName="IdTypeTrain" />
                 <ScalarProperty Name="NumberTypeTrain" ColumnName="NumberTypeTrain" />
@@ -589,7 +556,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="MetroDBModel.User">
+            <EntityTypeMapping TypeName="DBModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
@@ -599,7 +566,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VanTrain">
-            <EntityTypeMapping TypeName="MetroDBModel.VanTrain">
+            <EntityTypeMapping TypeName="DBModel.VanTrain">
               <MappingFragment StoreEntitySet="VanTrain">
                 <ScalarProperty Name="IdVanTrain" ColumnName="IdVanTrain" />
                 <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
@@ -610,7 +577,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="DepotMetroLine" TypeName="MetroDBModel.DepotMetroLine" StoreEntitySet="DepotMetroLine">
+          <AssociationSetMapping Name="DepotMetroLine" TypeName="DBModel.DepotMetroLine" StoreEntitySet="DepotMetroLine">
             <EndProperty Name="Depot">
               <ScalarProperty Name="IdDepot" ColumnName="IdDepot" />
             </EndProperty>

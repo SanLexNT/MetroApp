@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MetroApp.ClassFolder;
 using MetroApp.DataFolder;
+using MetroApp.WindowFolder.StaffWindowFolder;
 
 namespace MetroApp.PageFolder.StaffPageFolder
 {
@@ -43,9 +44,9 @@ namespace MetroApp.PageFolder.StaffPageFolder
         {
             if (currentPage == 1)
                 ToFirstBtn.IsEnabled = PreviousBtn.IsEnabled = false;
-            else if(currentPage == maxPage)
+            else if (currentPage == maxPage)
                 ToLastBtn.IsEnabled = NextBtn.IsEnabled = false;
-            else if(maxPage == 1)
+            else if (maxPage == 1)
             {
                 ToFirstBtn.IsEnabled = PreviousBtn.IsEnabled = false;
                 ToLastBtn.IsEnabled = NextBtn.IsEnabled = false;
@@ -67,7 +68,19 @@ namespace MetroApp.PageFolder.StaffPageFolder
         private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
         {
             TrainDg.ItemsSource = DBEntities.GetContext().VanTrain.Where
-                (v => v.SerialNumber.StartsWith(SearchTb.Text)).ToList();
+                (v => v.SerialNumber.StartsWith(SearchTb.Text) && v.IdDepot == VariableClass.IdDepot).ToList();
+        }
+
+        private void TrainDg_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void AddVanBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Application.Current.Windows.OfType<StaffMainWindow>().SingleOrDefault(w => w.IsActive);
+            new AddVanWindow().Show();
+            window.Close();
         }
 
         private void NextBtn_Click(object sender, RoutedEventArgs e)

@@ -165,15 +165,19 @@
         <Setter Property="FontFamily" Value="Arial"/>
         <Setter Property="AutoGenerateColumns" Value="False"/>
         <Setter Property="IsReadOnly" Value="True"/>
-        <Setter Property="BorderBrush" Value="{StaticResource MainBlue}"/>
+        <Setter Property="GridLinesVisibility" Value="None"/>
+    </Style>
+    <Style x:Key="DataGridHeaderStyle" TargetType="DataGridColumnHeader"
+           BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
     </Style>
     <Style x:Key="DatePickerStyle" TargetType="DatePicker"
            BasedOn="{StaticResource MaterialDesignOutlinedDatePicker}">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontFamily" Value="Arial"/>
         <Setter Property="materialDesign:TextFieldAssist.TextFieldCornerRadius" Value="5"/>
-        <Setter Property="Width" Value="160"/>
-        <Setter Property="Height" Value="35"/>
+        <Setter Property="Width" Value="335"/>
+        <Setter Property="Height" Value="55"/>
     </Style>
     <Style x:Key="CheckBoxStyle" TargetType="CheckBox"
            BasedOn="{StaticResource MaterialDesignCheckBox}">

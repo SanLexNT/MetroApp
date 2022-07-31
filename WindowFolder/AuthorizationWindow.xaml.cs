@@ -35,6 +35,7 @@ namespace MetroApp.WindowFolder
                 {
                     LoginTb.Text = sr.ReadLine();
                 }
+                RememberLoginChb.IsChecked = true;
             }
         }
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
