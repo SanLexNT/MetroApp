@@ -16,7 +16,7 @@ namespace MetroApp.DataFolder
     {
         public int IdVanTrain { get; set; }
         public string SerialNumber { get; set; }
-        public System.DateTime YearOfRelease { get; set; }
+        public System.DateTime DateOfRelease { get; set; }
         public int IdDepot { get; set; }
         public int IdStatus { get; set; }
         public int IdTypeTrain { get; set; }

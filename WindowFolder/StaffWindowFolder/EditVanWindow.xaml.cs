@@ -17,20 +17,23 @@ using MetroApp.DataFolder;
 namespace MetroApp.WindowFolder.StaffWindowFolder
 {
     /// <summary>
-    /// Логика взаимодействия для AddVanWindow.xaml
+    /// Логика взаимодействия для EditVanWindow.xaml
     /// </summary>
-    public partial class AddVanWindow : Window
+    public partial class EditVanWindow : Window
     {
-        public AddVanWindow()
+        int idVanTrain;
+        public EditVanWindow(int idVan)
         {
             InitializeComponent();
             LoadComboBox();
+            DataContext = DBEntities.GetContext().VanTrain.First(v => v.IdVanTrain == idVan);
+            idVanTrain = idVan;
         }
 
         private void LoadComboBox()
         {
             StatusCb.ItemsSource = DBEntities.GetContext().Status.ToList();
-            TypeTrainCb.ItemsSource = DBEntities.GetContext().TypeTrain.ToList();
+            DepotCb.ItemsSource = DBEntities.GetContext().Depot.ToList();
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -53,48 +56,39 @@ namespace MetroApp.WindowFolder.StaffWindowFolder
             MessageBoxClass.ExitMessageBox();
         }
 
-        private void AddBtn_Click(object sender, RoutedEventArgs e)
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(SerialNumberTb.Text))
                 MessageBoxClass.ErrorMessageBox("Введите серийный номер вагона", SerialNumberTb);
-            
+
             else if (DateOfReleaseDp.SelectedDate == null)
                 MessageBoxClass.ErrorMessageBox("Выберите дату выпуска", DateOfReleaseDp);
             else if (DateOfReleaseDp.SelectedDate > DateTime.Now)
                 MessageBoxClass.ErrorMessageBox("Выбранная дата еще не наступила", DateOfReleaseDp);
             else if (StatusCb.SelectedItem == null)
                 MessageBoxClass.ErrorMessageBox("Выберите статус вагона", StatusCb);
-            else if(TypeTrainCb.SelectedItem == null)
-                MessageBoxClass.ErrorMessageBox("Выберите тип вагона", TypeTrainCb);
+            else if (DepotCb.SelectedItem == null)
+                MessageBoxClass.ErrorMessageBox("Выберите тип вагона", DepotCb);
             else
             {
                 var van = DBEntities.GetContext().VanTrain.FirstOrDefault
-                    (v=>v.SerialNumber == SerialNumberTb.Text);
+                    (v => v.SerialNumber == SerialNumberTb.Text && v.IdVanTrain != v.IdVanTrain);
                 if (van != null)
                     MessageBoxClass.ErrorMessageBox("Вагон с таким серийным номером уже есть", SerialNumberTb);
                 else
                 {
-                    AddVan();
-                    MessageBoxClass.InfoMessageBox("Вагон добавлен в систему");
+                    UpdateData();
+                    MessageBoxClass.InfoMessageBox("Данные обновлены");
                     new StaffMainWindow().Show();
                     Close();
                 }
-                
+
             }
         }
-        private void AddVan()
+        private void UpdateData()
         {
             try
             {
-                var newVan = new VanTrain()
-                {
-                    SerialNumber = SerialNumberTb.Text,
-                    IdDepot = VariableClass.IdDepot,
-                    DateOfRelease = (DateTime)DateOfReleaseDp.SelectedDate,
-                    IdStatus = int.Parse(StatusCb.SelectedValue.ToString()),
-                    IdTypeTrain = int.Parse(TypeTrainCb.SelectedValue.ToString())
-                };
-                DBEntities.GetContext().VanTrain.Add(newVan);
                 DBEntities.GetContext().SaveChanges();
             }
             catch (Exception ex)

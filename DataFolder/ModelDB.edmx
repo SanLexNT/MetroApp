@@ -88,7 +88,7 @@
           </Key>
           <Property Name="IdVanTrain" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SerialNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="YearOfRelease" Type="date" Nullable="false" />
+          <Property Name="DateOfRelease" Type="date" Nullable="false" />
           <Property Name="IdDepot" Type="int" Nullable="false" />
           <Property Name="IdStatus" Type="int" Nullable="false" />
           <Property Name="IdTypeTrain" Type="int" Nullable="false" />
@@ -345,7 +345,7 @@
           </Key>
           <Property Name="IdVanTrain" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SerialNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="YearOfRelease" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateOfRelease" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IdDepot" Type="Int32" Nullable="false" />
           <Property Name="IdStatus" Type="Int32" Nullable="false" />
           <Property Name="IdTypeTrain" Type="Int32" Nullable="false" />
@@ -570,7 +570,7 @@
               <MappingFragment StoreEntitySet="VanTrain">
                 <ScalarProperty Name="IdVanTrain" ColumnName="IdVanTrain" />
                 <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
-                <ScalarProperty Name="YearOfRelease" ColumnName="YearOfRelease" />
+                <ScalarProperty Name="DateOfRelease" ColumnName="DateOfRelease" />
                 <ScalarProperty Name="IdDepot" ColumnName="IdDepot" />
                 <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
                 <ScalarProperty Name="IdTypeTrain" ColumnName="IdTypeTrain" />

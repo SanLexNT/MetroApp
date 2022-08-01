@@ -24,6 +24,7 @@ namespace MetroApp.PageFolder.StaffPageFolder
     public partial class TrainListPage : Page
     {
         int currentPage = 1, countInPage = 15, maxPage;
+        
         public TrainListPage()
         {
             InitializeComponent();
@@ -73,7 +74,13 @@ namespace MetroApp.PageFolder.StaffPageFolder
 
         private void TrainDg_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            var window = Application.Current.Windows.OfType<StaffMainWindow>().SingleOrDefault(w => w.IsActive);
+            VanTrain van = TrainDg.SelectedItem as VanTrain;
+            if(van != null)
+            {
+                new EditVanWindow(van.IdVanTrain).Show();
+                window.Close();
+            }
         }
 
         private void AddVanBtn_Click(object sender, RoutedEventArgs e)

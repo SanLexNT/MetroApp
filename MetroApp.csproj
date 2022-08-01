@@ -135,6 +135,9 @@
     <Compile Include="WindowFolder\StaffWindowFolder\AddVanWindow.xaml.cs">
       <DependentUpon>AddVanWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowFolder\StaffWindowFolder\EditVanWindow.xaml.cs">
+      <DependentUpon>EditVanWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowFolder\StaffWindowFolder\StaffMainWindow.xaml.cs">
       <DependentUpon>StaffMainWindow.xaml</DependentUpon>
     </Compile>
@@ -191,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WindowFolder\StaffWindowFolder\AddVanWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowFolder\StaffWindowFolder\EditVanWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
