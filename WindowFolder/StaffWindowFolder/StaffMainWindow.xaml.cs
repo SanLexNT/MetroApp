@@ -39,7 +39,7 @@ namespace MetroApp.WindowFolder.StaffWindowFolder
 
         private void ProfilBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Content = new PageFolder.StaffPageFolder.ProfilPage();
         }
 
         private void MinimizedBtn_Click(object sender, RoutedEventArgs e)

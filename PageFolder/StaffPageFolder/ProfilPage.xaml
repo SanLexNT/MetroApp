@@ -1,0 +1,99 @@
+﻿<Page x:Class="MetroApp.PageFolder.StaffPageFolder.ProfilPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MetroApp.PageFolder.StaffPageFolder"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="440" d:DesignWidth="610"
+      Title="Профиль">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="SurnameTb"
+                 Style="{DynamicResource TextBoxStyle}"
+                 Width="170"
+                 materialDesign:HintAssist.Hint="Фамилия"
+                 Text="{Binding Surname}"/>
+        <TextBox x:Name="NameTb"
+                 Grid.Column="1"
+                 Style="{DynamicResource TextBoxStyle}"
+                 Width="170"
+                 materialDesign:HintAssist.Hint="Имя"
+                 Text="{Binding NameStaff}"/>
+        <TextBox x:Name="PatronymicTb"
+                 Grid.Column="3"
+                 Style="{DynamicResource TextBoxStyle}"
+                 Width="170"
+                 materialDesign:HintAssist.Hint="Отчество"
+                 Text="{Binding Patronymic}"/>
+        <TextBox x:Name="DepotTb"
+                 Grid.Row="1"
+                 IsReadOnly="True"
+                 Style="{DynamicResource TextBoxStyle}"
+                 Width="170"
+                 materialDesign:HintAssist.Hint="Депо"
+                 Text="{Binding Depot.NameDepot}"/>
+        <DatePicker x:Name="DateOfBirthDp"
+                 Grid.Row="1"
+                 Grid.Column="1"
+                 Style="{DynamicResource DatePickerStyle}"
+                 Width="170"/>
+        <TextBox x:Name="LoginTb"
+                 Grid.Row="2"
+                 Style="{DynamicResource TextBoxStyle}"
+                 Width="170"
+                 materialDesign:HintAssist.Hint="Логин"
+                 Text="{Binding User.Login}"/>
+        <TextBox x:Name="PasswordTb"
+                 Grid.Row="2"
+                 Grid.Column="1"
+                 Style="{DynamicResource TextBoxStyle}"
+                 Width="170"
+                 materialDesign:HintAssist.Hint="Пароль"
+                 Text="{Binding User.Password}"/>
+        <Button x:Name="ImageBtn"
+                Grid.Row="1"
+                Grid.Column="2"
+                Height="240"
+                Background="{x:Null}"
+                Grid.RowSpan="2"
+                Click="ImageBtn_Click">
+            <Button.Content>
+                <Image Grid.Row="1"
+                       x:Name="PhotoIm"
+                       Grid.Column="2"
+                       Grid.RowSpan="2"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Stretch"
+                       Source="{Binding Photo}"/>
+            </Button.Content>
+        </Button>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="3"
+                    Grid.ColumnSpan="3">
+            <Button x:Name="BackBtn"
+                    Content="Назад"
+                    Margin="20 0 0 0"
+                    Style="{DynamicResource MainButtonStyle}"
+                    Click="BackBtn_Click"/>
+            <Button x:Name="SaveBtn"
+                    Content="Сохранить"
+                    Style="{DynamicResource MainButtonStyle}"
+                    Margin="270 0 0 0"
+                    Click="SaveBtn_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Page>

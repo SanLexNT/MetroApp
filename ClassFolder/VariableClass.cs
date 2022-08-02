@@ -12,5 +12,6 @@ namespace MetroApp.ClassFolder
         public const string PATH = "data.txt";
         public static int IdStaff { get; set; }
         public static int IdDepot { get; set; }
+        public static string SelectedFileName { get; set; }
     }
 }
