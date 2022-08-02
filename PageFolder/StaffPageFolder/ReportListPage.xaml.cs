@@ -12,31 +12,30 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MetroApp.ClassFolder;
 using MetroApp.DataFolder;
+using MetroApp.ClassFolder;
 using MetroApp.WindowFolder.StaffWindowFolder;
 
 namespace MetroApp.PageFolder.StaffPageFolder
 {
     /// <summary>
-    /// Логика взаимодействия для TrainListPage.xaml
+    /// Логика взаимодействия для ReportListPage.xaml
     /// </summary>
-    public partial class TrainListPage : Page
+    public partial class ReportListPage : Page
     {
         int currentPage = 1, countInPage = 15, maxPage;
-        
-        public TrainListPage()
+        public ReportListPage()
         {
             InitializeComponent();
             RefreshData();
         }
         private void RefreshData()
         {
-            var trains = DBEntities.GetContext().VanTrain.Where
-                (v => v.IdDepot == VariableClass.IdDepot).ToList();
-            maxPage = (int)Math.Ceiling(trains.Count * 1.0 / countInPage);
-            trains = trains.Skip((currentPage - 1) * countInPage).Take(countInPage).ToList();
-            TrainDg.ItemsSource = trains;
+            var reports = DBEntities.GetContext().Report.Where
+                (r => r.IdStaff == VariableClass.IdStaff).ToList();
+            maxPage = (int)Math.Ceiling(reports.Count * 1.0 / countInPage);
+            reports = reports.Skip((currentPage - 1) * countInPage).Take(countInPage).ToList();
+            ReportDg.ItemsSource = reports;
 
             lblNumberPage.Content = $"{currentPage}/{maxPage}";
             ManageButton();
@@ -48,10 +47,17 @@ namespace MetroApp.PageFolder.StaffPageFolder
                 ToFirstBtn.IsEnabled = PreviousBtn.IsEnabled = false;
                 ToLastBtn.IsEnabled = NextBtn.IsEnabled = false;
             }
-            if (currentPage == 1)
+            else if (currentPage == 1)
                 ToFirstBtn.IsEnabled = PreviousBtn.IsEnabled = false;
             else if (currentPage == maxPage)
                 ToLastBtn.IsEnabled = NextBtn.IsEnabled = false;
+        }
+
+        private void AddReportBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Application.Current.Windows.OfType<StaffMainWindow>().SingleOrDefault(w => w.IsActive);
+            new AddReportWindow().Show();
+            window.Close();
         }
 
         private void ToFirstBtn_Click(object sender, RoutedEventArgs e)
@@ -64,30 +70,6 @@ namespace MetroApp.PageFolder.StaffPageFolder
         {
             currentPage--;
             RefreshData();
-        }
-
-        private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TrainDg.ItemsSource = DBEntities.GetContext().VanTrain.Where
-                (v => v.SerialNumber.StartsWith(SearchTb.Text) && v.IdDepot == VariableClass.IdDepot).ToList();
-        }
-
-        private void TrainDg_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var window = Application.Current.Windows.OfType<StaffMainWindow>().SingleOrDefault(w => w.IsActive);
-            VanTrain van = TrainDg.SelectedItem as VanTrain;
-            if(van != null)
-            {
-                new EditVanWindow(van.IdVanTrain).Show();
-                window.Close();
-            }
-        }
-
-        private void AddVanBtn_Click(object sender, RoutedEventArgs e)
-        {
-            var window = Application.Current.Windows.OfType<StaffMainWindow>().SingleOrDefault(w => w.IsActive);
-            new AddVanWindow().Show();
-            window.Close();
         }
 
         private void NextBtn_Click(object sender, RoutedEventArgs e)

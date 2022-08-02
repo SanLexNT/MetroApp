@@ -31,6 +31,7 @@ namespace MetroApp.DataFolder
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Staff> Staff { get; set; }
         public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TypeTrain> TypeTrain { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<VanTrain> VanTrain { get; set; }

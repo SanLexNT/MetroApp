@@ -114,6 +114,9 @@
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DataFolder\StatusClass.cs" />
+    <Compile Include="DataFolder\sysdiagrams.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataFolder\TypeTrain.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
@@ -123,6 +126,9 @@
     <Compile Include="DataFolder\VanTrain.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="PageFolder\StaffPageFolder\ReportListPage.xaml.cs">
+      <DependentUpon>ReportListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFolder\StaffPageFolder\TrainListPage.xaml.cs">
       <DependentUpon>TrainListPage.xaml</DependentUpon>
     </Compile>
@@ -131,6 +137,9 @@
     </Compile>
     <Compile Include="WindowFolder\MessageWindow.xaml.cs">
       <DependentUpon>MessageWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowFolder\StaffWindowFolder\AddReportWindow.xaml.cs">
+      <DependentUpon>AddReportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowFolder\StaffWindowFolder\AddVanWindow.xaml.cs">
       <DependentUpon>AddVanWindow.xaml</DependentUpon>
@@ -177,6 +186,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="PageFolder\StaffPageFolder\ReportListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageFolder\StaffPageFolder\TrainListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -190,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WindowFolder\MessageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowFolder\StaffWindowFolder\AddReportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

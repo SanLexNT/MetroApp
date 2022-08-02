@@ -34,7 +34,7 @@ namespace MetroApp.WindowFolder.StaffWindowFolder
 
         private void MyReportBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Content = new PageFolder.StaffPageFolder.ReportListPage();
         }
 
         private void ProfilBtn_Click(object sender, RoutedEventArgs e)
