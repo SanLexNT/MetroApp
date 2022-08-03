@@ -27,6 +27,7 @@ namespace MetroApp.DataFolder
     
         public virtual DbSet<Depot> Depot { get; set; }
         public virtual DbSet<MetroLine> MetroLine { get; set; }
+        public virtual DbSet<MetroLineDepot> MetroLineDepot { get; set; }
         public virtual DbSet<Report> Report { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Staff> Staff { get; set; }

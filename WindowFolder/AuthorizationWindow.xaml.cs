@@ -84,6 +84,12 @@ namespace MetroApp.WindowFolder
                     string.IsNullOrWhiteSpace(PasswordTb.Text))
                 MessageBoxClass.ErrorMessageBox("Вы не ввели пароль", PasswordPb, PasswordTb);
             else
+                Authorize();
+
+        }
+        private void Authorize()
+        {
+            try
             {
                 var user = DBEntities.GetContext().User.FirstOrDefault(u => u.Login == LoginTb.Text);
                 if (user == null)
@@ -99,7 +105,8 @@ namespace MetroApp.WindowFolder
                     switch (user.IdRole)
                     {
                         case 1:
-                            MessageBoxClass.InfoMessageBox("Админ");
+                            new AdminWindowFolder.AdminMainWindow().Show();
+                            Close();
                             break;
                         case 2:
                             var staff = DBEntities.GetContext().Staff.FirstOrDefault(s => s.IdUser == user.IdUser);
@@ -118,6 +125,10 @@ namespace MetroApp.WindowFolder
                             break;
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBoxClass.ErrorMessageBox(ex);
             }
         }
         private void SaveLogin(string login)

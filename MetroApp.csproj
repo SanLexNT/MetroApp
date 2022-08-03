@@ -88,6 +88,9 @@
     <Compile Include="DataFolder\MetroLine.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataFolder\MetroLineDepot.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataFolder\ModelDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -115,7 +118,6 @@
     <Compile Include="DataFolder\Status.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataFolder\StatusClass.cs" />
     <Compile Include="DataFolder\sysdiagrams.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
@@ -128,6 +130,10 @@
     <Compile Include="DataFolder\VanTrain.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataFolder\VanTrainClass.cs" />
+    <Compile Include="PageFolder\AdminPageFolder\DepotListPage.xaml.cs">
+      <DependentUpon>DepotListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFolder\StaffPageFolder\ProfilPage.xaml.cs">
       <DependentUpon>ProfilPage.xaml</DependentUpon>
     </Compile>
@@ -136,6 +142,9 @@
     </Compile>
     <Compile Include="PageFolder\StaffPageFolder\TrainListPage.xaml.cs">
       <DependentUpon>TrainListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowFolder\AdminWindowFolder\AdminMainWindow.xaml.cs">
+      <DependentUpon>AdminMainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowFolder\AuthorizationWindow.xaml.cs">
       <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
@@ -191,6 +200,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="PageFolder\AdminPageFolder\DepotListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageFolder\StaffPageFolder\ProfilPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -204,6 +217,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceFolder\Dictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowFolder\AdminWindowFolder\AdminMainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

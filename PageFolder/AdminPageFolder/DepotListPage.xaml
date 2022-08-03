@@ -1,0 +1,58 @@
+﻿<Page x:Class="MetroApp.PageFolder.AdminPageFolder.DepotListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MetroApp.PageFolder.AdminPageFolder"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="440" d:DesignWidth="610"
+      Title="Список депо">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="AddDepot"
+                    Width="35"
+                    Margin="10"
+                    Style="{DynamicResource MainButtonStyle}"
+                    Click="AddDepot_Click">
+                    <materialDesign:PackIcon Kind="AddCircle"
+                                             Height="35"
+                                             Width="35"/>
+            </Button>
+            <Button x:Name="ImportBtn"
+                    Width="35"
+                    Margin="10"
+                    Style="{DynamicResource MainButtonStyle}"
+                    Click="ImportBtn_Click">
+                <materialDesign:PackIcon Kind="FileExcel"
+                                         Height="35"
+                                         Width="35"/>
+            </Button>
+            <TextBox x:Name="SearchTb"
+                     Style="{DynamicResource TextBoxStyle}"
+                     Margin="150 0 0 0"
+                     Padding="10 2 0 0"
+                     Height="50"
+                     FontSize="14"
+                     TextChanged="SearchTb_TextChanged"
+                     materialDesign:HintAssist.Hint="Введите поисковый запрос"/>
+        </StackPanel>
+        <DataGrid Grid.Row="1"
+                  x:Name="DepotDg"
+                  Style="{DynamicResource DataGridStyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название депо"
+                                    Binding="{Binding Depot.NameDepot}"
+                                    Width="*"/>
+                <DataGridTextColumn Header="Обслуживаемая линия"
+                                    Binding="{Binding MetroLine.NameMetroLine}"
+                                    Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

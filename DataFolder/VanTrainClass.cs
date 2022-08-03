@@ -7,18 +7,16 @@ using System.Windows.Media;
 
 namespace MetroApp.DataFolder
 {
-    public partial class Status
+    public partial class VanTrain
     {
         public SolidColorBrush StatusColor
         {
             get
             {
-                if (NameStatus == "Списан")
-                    return Brushes.LightCyan;
-                else if (NameStatus == "Порезан")
+                if (Status.NameStatus == "Списан" || Status.NameStatus == "Порезан")
                     return Brushes.Red;
                 else
-                    return Brushes.Transparent;
+                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2196F3"));
             }
         }
     }

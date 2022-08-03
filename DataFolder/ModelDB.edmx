@@ -12,22 +12,20 @@
           <Property Name="IdDepot" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NameDepot" Type="nvarchar" MaxLength="60" Nullable="false" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "MetroDB.dbo.DepotMetroLine" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
-        <EntityType Name="DepotMetroLine">
-          <Key>
-            <PropertyRef Name="IdDepot" />
-            <PropertyRef Name="IdMetroLine" />
-          </Key>
-          <Property Name="IdDepot" Type="int" Nullable="false" />
-          <Property Name="IdMetroLine" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="MetroLine">
           <Key>
-            <PropertyRef Name="IdMetroLines" />
+            <PropertyRef Name="IdMetroLine" />
           </Key>
-          <Property Name="IdMetroLines" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NameMetroLines" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdMetroLine" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameMetroLine" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MetroLineDepot">
+          <Key>
+            <PropertyRef Name="IdMetroLineDepot" />
+          </Key>
+          <Property Name="IdMetroLineDepot" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdMetroLine" Type="int" Nullable="false" />
+          <Property Name="IdDepot" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -103,26 +101,26 @@
           <Property Name="IdStatus" Type="int" Nullable="false" />
           <Property Name="IdTypeTrain" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_DepotMetroLine_Depot">
+        <Association Name="FK_MetroLineDepot_Depot">
           <End Role="Depot" Type="Self.Depot" Multiplicity="1" />
-          <End Role="DepotMetroLine" Type="Self.DepotMetroLine" Multiplicity="*" />
+          <End Role="MetroLineDepot" Type="Self.MetroLineDepot" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Depot">
               <PropertyRef Name="IdDepot" />
             </Principal>
-            <Dependent Role="DepotMetroLine">
+            <Dependent Role="MetroLineDepot">
               <PropertyRef Name="IdDepot" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DepotMetroLine_MetroLine">
+        <Association Name="FK_MetroLineDepot_MetroLine">
           <End Role="MetroLine" Type="Self.MetroLine" Multiplicity="1" />
-          <End Role="DepotMetroLine" Type="Self.DepotMetroLine" Multiplicity="*" />
+          <End Role="MetroLineDepot" Type="Self.MetroLineDepot" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MetroLine">
-              <PropertyRef Name="IdMetroLines" />
+              <PropertyRef Name="IdMetroLine" />
             </Principal>
-            <Dependent Role="DepotMetroLine">
+            <Dependent Role="MetroLineDepot">
               <PropertyRef Name="IdMetroLine" />
             </Dependent>
           </ReferentialConstraint>
@@ -214,6 +212,7 @@
         <EntityContainer Name="Хранилище DBModelContainer">
           <EntitySet Name="Depot" EntityType="Self.Depot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MetroLine" EntityType="Self.MetroLine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MetroLineDepot" EntityType="Self.MetroLineDepot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
@@ -222,19 +221,13 @@
           <EntitySet Name="TypeTrain" EntityType="Self.TypeTrain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VanTrain" EntityType="Self.VanTrain" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DepotMetroLine" EntityType="Self.DepotMetroLine" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [DepotMetroLine].[IdDepot] AS [IdDepot], 
-    [DepotMetroLine].[IdMetroLine] AS [IdMetroLine]
-    FROM [dbo].[DepotMetroLine] AS [DepotMetroLine]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK_DepotMetroLine_Depot" Association="Self.FK_DepotMetroLine_Depot">
+          <AssociationSet Name="FK_MetroLineDepot_Depot" Association="Self.FK_MetroLineDepot_Depot">
             <End Role="Depot" EntitySet="Depot" />
-            <End Role="DepotMetroLine" EntitySet="DepotMetroLine" />
+            <End Role="MetroLineDepot" EntitySet="MetroLineDepot" />
           </AssociationSet>
-          <AssociationSet Name="FK_DepotMetroLine_MetroLine" Association="Self.FK_DepotMetroLine_MetroLine">
+          <AssociationSet Name="FK_MetroLineDepot_MetroLine" Association="Self.FK_MetroLineDepot_MetroLine">
             <End Role="MetroLine" EntitySet="MetroLine" />
-            <End Role="DepotMetroLine" EntitySet="DepotMetroLine" />
+            <End Role="MetroLineDepot" EntitySet="MetroLineDepot" />
           </AssociationSet>
           <AssociationSet Name="FK_Report_Staff" Association="Self.FK_Report_Staff">
             <End Role="Staff" EntitySet="Staff" />
@@ -276,17 +269,27 @@
           </Key>
           <Property Name="IdDepot" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NameDepot" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="MetroLineDepot" Relationship="Self.FK_MetroLineDepot_Depot" FromRole="Depot" ToRole="MetroLineDepot" />
           <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_Depot" FromRole="Depot" ToRole="Staff" />
           <NavigationProperty Name="VanTrain" Relationship="Self.FK_VanTrain_Depot" FromRole="Depot" ToRole="VanTrain" />
-          <NavigationProperty Name="MetroLine" Relationship="Self.DepotMetroLine" FromRole="Depot" ToRole="MetroLine" />
         </EntityType>
         <EntityType Name="MetroLine">
           <Key>
-            <PropertyRef Name="IdMetroLines" />
+            <PropertyRef Name="IdMetroLine" />
           </Key>
-          <Property Name="IdMetroLines" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NameMetroLines" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Depot" Relationship="Self.DepotMetroLine" FromRole="MetroLine" ToRole="Depot" />
+          <Property Name="IdMetroLine" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameMetroLine" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="MetroLineDepot" Relationship="Self.FK_MetroLineDepot_MetroLine" FromRole="MetroLine" ToRole="MetroLineDepot" />
+        </EntityType>
+        <EntityType Name="MetroLineDepot">
+          <Key>
+            <PropertyRef Name="IdMetroLineDepot" />
+          </Key>
+          <Property Name="IdMetroLineDepot" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdMetroLine" Type="Int32" Nullable="false" />
+          <Property Name="IdDepot" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Depot" Relationship="Self.FK_MetroLineDepot_Depot" FromRole="MetroLineDepot" ToRole="Depot" />
+          <NavigationProperty Name="MetroLine" Relationship="Self.FK_MetroLineDepot_MetroLine" FromRole="MetroLineDepot" ToRole="MetroLine" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -374,6 +377,18 @@
           <NavigationProperty Name="Status" Relationship="Self.FK_VanTrain_Status" FromRole="VanTrain" ToRole="Status" />
           <NavigationProperty Name="TypeTrain" Relationship="Self.FK_VanTrain_TypeTrain" FromRole="VanTrain" ToRole="TypeTrain" />
         </EntityType>
+        <Association Name="FK_MetroLineDepot_Depot">
+          <End Role="Depot" Type="Self.Depot" Multiplicity="1" />
+          <End Role="MetroLineDepot" Type="Self.MetroLineDepot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depot">
+              <PropertyRef Name="IdDepot" />
+            </Principal>
+            <Dependent Role="MetroLineDepot">
+              <PropertyRef Name="IdDepot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Staff_Depot">
           <End Role="Depot" Type="Self.Depot" Multiplicity="1" />
           <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
@@ -395,6 +410,18 @@
             </Principal>
             <Dependent Role="VanTrain">
               <PropertyRef Name="IdDepot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MetroLineDepot_MetroLine">
+          <End Role="MetroLine" Type="Self.MetroLine" Multiplicity="1" />
+          <End Role="MetroLineDepot" Type="Self.MetroLineDepot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MetroLine">
+              <PropertyRef Name="IdMetroLine" />
+            </Principal>
+            <Dependent Role="MetroLineDepot">
+              <PropertyRef Name="IdMetroLine" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -458,13 +485,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="DepotMetroLine">
-          <End Role="Depot" Type="Self.Depot" Multiplicity="*" />
-          <End Role="MetroLine" Type="Self.MetroLine" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Depot" EntityType="Self.Depot" />
           <EntitySet Name="MetroLine" EntityType="Self.MetroLine" />
+          <EntitySet Name="MetroLineDepot" EntityType="Self.MetroLineDepot" />
           <EntitySet Name="Report" EntityType="Self.Report" />
           <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="Staff" EntityType="Self.Staff" />
@@ -473,6 +497,10 @@
           <EntitySet Name="TypeTrain" EntityType="Self.TypeTrain" />
           <EntitySet Name="User" EntityType="Self.User" />
           <EntitySet Name="VanTrain" EntityType="Self.VanTrain" />
+          <AssociationSet Name="FK_MetroLineDepot_Depot" Association="Self.FK_MetroLineDepot_Depot">
+            <End Role="Depot" EntitySet="Depot" />
+            <End Role="MetroLineDepot" EntitySet="MetroLineDepot" />
+          </AssociationSet>
           <AssociationSet Name="FK_Staff_Depot" Association="Self.FK_Staff_Depot">
             <End Role="Depot" EntitySet="Depot" />
             <End Role="Staff" EntitySet="Staff" />
@@ -480,6 +508,10 @@
           <AssociationSet Name="FK_VanTrain_Depot" Association="Self.FK_VanTrain_Depot">
             <End Role="Depot" EntitySet="Depot" />
             <End Role="VanTrain" EntitySet="VanTrain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MetroLineDepot_MetroLine" Association="Self.FK_MetroLineDepot_MetroLine">
+            <End Role="MetroLine" EntitySet="MetroLine" />
+            <End Role="MetroLineDepot" EntitySet="MetroLineDepot" />
           </AssociationSet>
           <AssociationSet Name="FK_Report_Staff" Association="Self.FK_Report_Staff">
             <End Role="Staff" EntitySet="Staff" />
@@ -501,10 +533,6 @@
             <End Role="TypeTrain" EntitySet="TypeTrain" />
             <End Role="VanTrain" EntitySet="VanTrain" />
           </AssociationSet>
-          <AssociationSet Name="DepotMetroLine" Association="Self.DepotMetroLine">
-            <End Role="Depot" EntitySet="Depot" />
-            <End Role="MetroLine" EntitySet="MetroLine" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -523,8 +551,17 @@
           <EntitySetMapping Name="MetroLine">
             <EntityTypeMapping TypeName="DBModel.MetroLine">
               <MappingFragment StoreEntitySet="MetroLine">
-                <ScalarProperty Name="IdMetroLines" ColumnName="IdMetroLines" />
-                <ScalarProperty Name="NameMetroLines" ColumnName="NameMetroLines" />
+                <ScalarProperty Name="IdMetroLine" ColumnName="IdMetroLine" />
+                <ScalarProperty Name="NameMetroLine" ColumnName="NameMetroLine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MetroLineDepot">
+            <EntityTypeMapping TypeName="DBModel.MetroLineDepot">
+              <MappingFragment StoreEntitySet="MetroLineDepot">
+                <ScalarProperty Name="IdMetroLineDepot" ColumnName="IdMetroLineDepot" />
+                <ScalarProperty Name="IdMetroLine" ColumnName="IdMetroLine" />
+                <ScalarProperty Name="IdDepot" ColumnName="IdDepot" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -610,14 +647,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="DepotMetroLine" TypeName="DBModel.DepotMetroLine" StoreEntitySet="DepotMetroLine">
-            <EndProperty Name="Depot">
-              <ScalarProperty Name="IdDepot" ColumnName="IdDepot" />
-            </EndProperty>
-            <EndProperty Name="MetroLine">
-              <ScalarProperty Name="IdMetroLines" ColumnName="IdMetroLine" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

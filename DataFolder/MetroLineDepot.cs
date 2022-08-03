@@ -12,18 +12,13 @@ namespace MetroApp.DataFolder
     using System;
     using System.Collections.Generic;
     
-    public partial class MetroLine
+    public partial class MetroLineDepot
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MetroLine()
-        {
-            this.MetroLineDepot = new HashSet<MetroLineDepot>();
-        }
-    
+        public int IdMetroLineDepot { get; set; }
         public int IdMetroLine { get; set; }
-        public string NameMetroLine { get; set; }
+        public int IdDepot { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MetroLineDepot> MetroLineDepot { get; set; }
+        public virtual Depot Depot { get; set; }
+        public virtual MetroLine MetroLine { get; set; }
     }
 }

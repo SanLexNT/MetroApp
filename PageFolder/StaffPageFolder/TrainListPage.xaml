@@ -22,7 +22,7 @@
                     Margin="10"
                     Click="AddVanBtn_Click">
                 <Button.Content>
-                    <materialDesign:PackIcon Kind="AddCircleOutline"
+                    <materialDesign:PackIcon Kind="AddCircle"
                                              Height="35"
                                              Width="35"/>
                 </Button.Content>
@@ -51,7 +51,7 @@
                                     Binding="{Binding SerialNumber}"
                                     Width="*"/>
                 <DataGridTextColumn Header="Выпуск"
-                                    Binding="{Binding YearOfRelease, StringFormat=\{0:yyyy\}}"
+                                    Binding="{Binding DateOfRelease, StringFormat=\{0:yyyy\}}"
                                     Width="*"/>
                 <DataGridTextColumn Header="Статус"
                                     Binding="{Binding Status.NameStatus}"

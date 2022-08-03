@@ -22,7 +22,7 @@
                     Margin="10"
                     Click="AddReportBtn_Click">
                 <Button.Content>
-                    <materialDesign:PackIcon Kind="AddCircleOutline"
+                    <materialDesign:PackIcon Kind="AddCircle"
                                              Height="35"
                                              Width="35"/>
                 </Button.Content>
