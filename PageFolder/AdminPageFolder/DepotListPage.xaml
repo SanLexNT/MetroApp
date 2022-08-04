@@ -24,18 +24,9 @@
                                              Height="35"
                                              Width="35"/>
             </Button>
-            <Button x:Name="ImportBtn"
-                    Width="35"
-                    Margin="10"
-                    Style="{DynamicResource MainButtonStyle}"
-                    Click="ImportBtn_Click">
-                <materialDesign:PackIcon Kind="FileExcel"
-                                         Height="35"
-                                         Width="35"/>
-            </Button>
             <TextBox x:Name="SearchTb"
                      Style="{DynamicResource TextBoxStyle}"
-                     Margin="150 0 0 0"
+                     Margin="210 0 0 0"
                      Padding="10 2 0 0"
                      Height="50"
                      FontSize="14"

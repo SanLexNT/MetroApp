@@ -45,7 +45,7 @@ namespace MetroApp.WindowFolder
                 DragMove();
             }
             catch
-            { }
+            {}
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
