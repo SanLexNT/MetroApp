@@ -17,13 +17,13 @@ namespace MetroApp.DataFolder
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MetroLine()
         {
-            this.MetroLineDepot = new HashSet<MetroLineDepot>();
+            this.DepotMetroLine = new HashSet<DepotMetroLine>();
         }
     
         public int IdMetroLine { get; set; }
         public string NameMetroLine { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MetroLineDepot> MetroLineDepot { get; set; }
+        public virtual ICollection<DepotMetroLine> DepotMetroLine { get; set; }
     }
 }

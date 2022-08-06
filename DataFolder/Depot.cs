@@ -17,7 +17,7 @@ namespace MetroApp.DataFolder
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Depot()
         {
-            this.MetroLineDepot = new HashSet<MetroLineDepot>();
+            this.DepotMetroLine = new HashSet<DepotMetroLine>();
             this.Staff = new HashSet<Staff>();
             this.VanTrain = new HashSet<VanTrain>();
         }
@@ -26,7 +26,7 @@ namespace MetroApp.DataFolder
         public string NameDepot { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MetroLineDepot> MetroLineDepot { get; set; }
+        public virtual ICollection<DepotMetroLine> DepotMetroLine { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Staff> Staff { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

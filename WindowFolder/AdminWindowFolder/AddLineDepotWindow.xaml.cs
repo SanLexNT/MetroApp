@@ -137,12 +137,12 @@ namespace MetroApp.WindowFolder.AdminWindowFolder
         {
             try
             {
-                var lineDepot = new MetroLineDepot()
+                var lineDepot = new DepotMetroLine()
                 {
                     IdMetroLine = line.IdMetroLine,
                     IdDepot = int.Parse(DepotCb.SelectedValue.ToString())
                 };
-                DBEntities.GetContext().MetroLineDepot.Add(lineDepot);
+                DBEntities.GetContext().DepotMetroLine.Add(lineDepot);
                 DBEntities.GetContext().SaveChanges();
             }
             catch (Exception ex)
@@ -150,6 +150,12 @@ namespace MetroApp.WindowFolder.AdminWindowFolder
                 MessageBoxClass.ErrorMessageBox(ex);
             }
             
+        }
+
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new AdminMainWindow().Show();
+            Close();
         }
     }
 }

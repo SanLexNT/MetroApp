@@ -12,11 +12,11 @@ namespace MetroApp.DataFolder
     using System;
     using System.Collections.Generic;
     
-    public partial class MetroLineDepot
+    public partial class DepotMetroLine
     {
         public int IdMetroLineDepot { get; set; }
-        public int IdMetroLine { get; set; }
         public int IdDepot { get; set; }
+        public int IdMetroLine { get; set; }
     
         public virtual Depot Depot { get; set; }
         public virtual MetroLine MetroLine { get; set; }

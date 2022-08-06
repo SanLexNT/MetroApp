@@ -53,11 +53,20 @@
                 <TextBox x:Name="NameDepotTb"
                          Style="{DynamicResource TextBoxStyle}"
                          materialDesign:HintAssist.Hint="Введите название депо"/>
-                <Button x:Name="AddDepotBtn"
-                        Content="Добавить"
-                        Style="{DynamicResource MainButtonStyle}"
-                        Grid.Row="1"
-                        Click="AddDepotBtn_Click"/>
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="1"
+                            Width="335">
+                    <Button x:Name="BackBtn"
+                            Content="Назад"
+                            Style="{DynamicResource MainButtonStyle}"
+                            Click="BackBtn_Click"/>
+                    <Button x:Name="AddDepotBtn"
+                            Content="Добавить"
+                            Margin="35 0 0 0"
+                            Style="{DynamicResource MainButtonStyle}"
+                            Click="AddDepotBtn_Click"/>
+                </StackPanel>
+                
             </Grid>
             <Grid x:Name="LineGrid"
                   Grid.Row="1"
@@ -76,11 +85,21 @@
                           materialDesign:HintAssist.Hint="Выберите обслуживаемое депо"
                           DisplayMemberPath="NameDepot"
                           SelectedValuePath="IdDepot"/>
-                <Button x:Name="AddLineBtn"
-                        Content="Добавить"
-                        Style="{DynamicResource MainButtonStyle}"
-                        Grid.Row="2"
-                        Click="AddLineBtn_Click"/>
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="2"
+                            Width="335">
+                    <Button x:Name="Back1Btn"
+                            Content="Назад"
+                            Style="{DynamicResource MainButtonStyle}"
+                            Click="BackBtn_Click"/>
+                    <Button x:Name="AddLineBtn"
+                            Content="Добавить"
+                            Style="{DynamicResource MainButtonStyle}"
+                            Grid.Row="2"
+                            Margin="35 0 0 0"
+                            Click="AddLineBtn_Click"/>
+                </StackPanel>
+                
             </Grid>
         </Grid>
     </materialDesign:Card>

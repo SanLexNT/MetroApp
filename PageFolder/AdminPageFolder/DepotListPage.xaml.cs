@@ -31,7 +31,7 @@ namespace MetroApp.PageFolder.AdminPageFolder
         }
         private void LoadData()
         {
-            DepotDg.ItemsSource = DBEntities.GetContext().MetroLineDepot.ToList();
+            DepotDg.ItemsSource = DBEntities.GetContext().DepotMetroLine.ToList();
         }
 
         private void AddDepot_Click(object sender, RoutedEventArgs e)
@@ -43,9 +43,9 @@ namespace MetroApp.PageFolder.AdminPageFolder
 
         private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-            DepotDg.ItemsSource = DBEntities.GetContext().MetroLineDepot.Where
+            DepotDg.ItemsSource = DBEntities.GetContext().DepotMetroLine.Where
                 (l => l.Depot.NameDepot.StartsWith(SearchTb.Text) ||
-                l.MetroLine.NameMetroLine.StartsWith(SearchTb.Text));
+                l.MetroLine.NameMetroLine.StartsWith(SearchTb.Text)).ToList();
         }
     }
 }

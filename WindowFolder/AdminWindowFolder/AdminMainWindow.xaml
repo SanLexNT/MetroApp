@@ -100,7 +100,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right">
+                            HorizontalAlignment="Right">
                     <Button x:Name="MinimizedBtn"
                         Style="{DynamicResource MinimizedButtonStyle}"
                         Click="MinimizedBtn_Click"/>

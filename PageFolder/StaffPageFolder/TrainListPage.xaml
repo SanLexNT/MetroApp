@@ -35,11 +35,10 @@
             <TextBox x:Name="SearchTb"
                      Style="{DynamicResource TextBoxStyle}"
                      Margin="210 0 0 0"
-                     Padding="10 2 0 0"
                      Height="50"
                      FontSize="14"
                      TextChanged="SearchTb_TextChanged"
-                     materialDesign:HintAssist.Hint="Введите поисковый запрос"/>
+                     materialDesign:HintAssist.Hint="Введите поисковый запрос" Cursor="Arrow"/>
         </StackPanel>
         <DataGrid x:Name="TrainDg"
                   Grid.Row="1"

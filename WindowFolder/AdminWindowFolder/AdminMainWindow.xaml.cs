@@ -43,7 +43,7 @@ namespace MetroApp.WindowFolder.AdminWindowFolder
 
         private void TrainBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Content = new PageFolder.AdminPageFolder.TrainListPage();
         }
 
         private void ReportBtn_Click(object sender, RoutedEventArgs e)
