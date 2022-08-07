@@ -11,19 +11,20 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MetroApp.DataFolder;
 using MetroApp.ClassFolder;
 
 namespace MetroApp.WindowFolder.AdminWindowFolder
 {
     /// <summary>
-    /// Логика взаимодействия для AdminMainWindow.xaml
+    /// Логика взаимодействия для ReportWindow.xaml
     /// </summary>
-    public partial class AdminMainWindow : Window
+    public partial class ReportWindow : Window
     {
-        public AdminMainWindow()
+        public ReportWindow(int idReport)
         {
             InitializeComponent();
-            MainFrame.Content = new PageFolder.AdminPageFolder.DepotListPage();
+            DataContext = DBEntities.GetContext().Report.FirstOrDefault(r => r.IdReport == idReport);
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -36,26 +37,6 @@ namespace MetroApp.WindowFolder.AdminWindowFolder
             {}
         }
 
-        private void DepotBtn_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new PageFolder.AdminPageFolder.DepotListPage();
-        }
-
-        private void TrainBtn_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new PageFolder.AdminPageFolder.TrainListPage();
-        }
-
-        private void ReportBtn_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new PageFolder.AdminPageFolder.ReportListPage();
-        }
-
-        private void EmployeeBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void MinimizedBtn_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
@@ -64,6 +45,12 @@ namespace MetroApp.WindowFolder.AdminWindowFolder
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxClass.ExitMessageBox();
+        }
+
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            new AdminMainWindow().Show();
+            Close();
         }
     }
 }

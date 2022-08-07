@@ -42,7 +42,7 @@ namespace MetroApp.PageFolder.StaffPageFolder
         }
         private void ManageButton()
         {
-            if (currentPage == 1 && maxPage == 1)
+            if (currentPage <= 1 && maxPage <= 1)
             {
                 ToFirstBtn.IsEnabled = PreviousBtn.IsEnabled = false;
                 ToLastBtn.IsEnabled = NextBtn.IsEnabled = false;
