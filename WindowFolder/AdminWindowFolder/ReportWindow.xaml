@@ -41,7 +41,7 @@
                      Grid.Row="2"
                      Style="{DynamicResource TextBoxStyle}"
                      materialDesign:HintAssist.Hint="Дата отчета"
-                     Text="{Binding DateOfReport}"/>
+                     Text="{Binding DateOfReport}" Cursor="Arrow"/>
             <TextBox Style="{DynamicResource TextBoxStyle}"
                      Grid.Row="3"/>
             <TextBlock Grid.Row="3"

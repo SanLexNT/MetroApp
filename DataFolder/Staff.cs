@@ -25,7 +25,7 @@ namespace MetroApp.DataFolder
         public string NameStaff { get; set; }
         public string Patronymic { get; set; }
         public int IdDepot { get; set; }
-        public System.DateTime DateOfBitrh { get; set; }
+        public System.DateTime DateOfBirth { get; set; }
         public byte[] Photo { get; set; }
         public Nullable<int> IdUser { get; set; }
     

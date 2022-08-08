@@ -52,7 +52,7 @@
           <Property Name="NameStaff" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="Patronymic" Type="nvarchar" MaxLength="40" />
           <Property Name="IdDepot" Type="int" Nullable="false" />
-          <Property Name="DateOfBitrh" Type="date" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
           <Property Name="Photo" Type="varbinary(max)" />
           <Property Name="IdUser" Type="int" />
         </EntityType>
@@ -318,7 +318,7 @@
           <Property Name="NameStaff" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Patronymic" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="IdDepot" Type="Int32" Nullable="false" />
-          <Property Name="DateOfBitrh" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="IdUser" Type="Int32" />
           <NavigationProperty Name="Depot" Relationship="Self.FK_Staff_Depot" FromRole="Staff" ToRole="Depot" />
@@ -591,7 +591,7 @@
                 <ScalarProperty Name="NameStaff" ColumnName="NameStaff" />
                 <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
                 <ScalarProperty Name="IdDepot" ColumnName="IdDepot" />
-                <ScalarProperty Name="DateOfBitrh" ColumnName="DateOfBitrh" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
               </MappingFragment>

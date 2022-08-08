@@ -53,7 +53,7 @@ namespace MetroApp.WindowFolder.AdminWindowFolder
 
         private void EmployeeBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Content = new PageFolder.AdminPageFolder.StaffListPage();
         }
 
         private void MinimizedBtn_Click(object sender, RoutedEventArgs e)

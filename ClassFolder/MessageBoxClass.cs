@@ -19,13 +19,9 @@ namespace MetroApp.ClassFolder
                 control.Focus();
             }
         }
-        public static void ErrorMessageBox(Exception ex, params Control[] controls)
+        public static void ErrorMessageBox(Exception ex)
         {
             new MessageWindow(ex.Message, MessageWindow.MessageType.Error).ShowDialog();
-            foreach (var control in controls)
-            {
-                control.Focus();
-            }
         }
         public static void InfoMessageBox(string text)
         {

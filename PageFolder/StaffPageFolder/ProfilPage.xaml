@@ -69,7 +69,7 @@
                 Height="240"
                 Background="{x:Null}"
                 Grid.RowSpan="2"
-                Click="ImageBtn_Click">
+                Click="ImageBtn_Click" Cursor="Hand">
             <Button.Content>
                 <Image Grid.Row="1"
                        x:Name="PhotoIm"

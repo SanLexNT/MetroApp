@@ -27,9 +27,8 @@
             <TextBox x:Name="SearchTb"
                      Style="{DynamicResource TextBoxStyle}"
                      Margin="210 0 0 0"
-                     Height="50"
                      TextChanged="SearchTb_TextChanged"
-                     materialDesign:HintAssist.Hint="Введите поисковый запрос"/>
+                     materialDesign:HintAssist.Hint="Введите поисковый запрос" Cursor="Arrow"/>
         </StackPanel>
         <DataGrid Grid.Row="1"
                   x:Name="DepotDg"

@@ -34,16 +34,19 @@ namespace MetroApp.PageFolder.StaffPageFolder
         {
             var trains = DBEntities.GetContext().VanTrain.Where
                 (v => v.IdDepot == VariableClass.IdDepot).ToList();
+            
             maxPage = (int)Math.Ceiling(trains.Count * 1.0 / countInPage);
             trains = trains.Skip((currentPage - 1) * countInPage).Take(countInPage).ToList();
             TrainDg.ItemsSource = trains;
-
-            lblNumberPage.Content = $"{currentPage}/{maxPage}";
+            if (trains.Count <= 0)
+                lblNumberPage.Content = $"0/0";
+            else
+                lblNumberPage.Content = $"{currentPage}/{maxPage}";
             ManageButton();
         }
         private void ManageButton()
         {
-            if (currentPage == 1 && maxPage == 1)
+            if (currentPage <= 1 && maxPage <= 1)
             {
                 ToFirstBtn.IsEnabled = PreviousBtn.IsEnabled = false;
                 ToLastBtn.IsEnabled = NextBtn.IsEnabled = false;

@@ -36,8 +36,10 @@ namespace MetroApp.PageFolder.StaffPageFolder
             maxPage = (int)Math.Ceiling(reports.Count * 1.0 / countInPage);
             reports = reports.Skip((currentPage - 1) * countInPage).Take(countInPage).ToList();
             ReportDg.ItemsSource = reports;
-
-            lblNumberPage.Content = $"{currentPage}/{maxPage}";
+            if (reports.Count <= 0)
+                lblNumberPage.Content = $"0/0";
+            else
+                lblNumberPage.Content = $"{currentPage}/{maxPage}";
             ManageButton();
         }
         private void ManageButton()

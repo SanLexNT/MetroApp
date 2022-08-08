@@ -21,15 +21,13 @@
                 <ColumnDefinition Width="170"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="120"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Image Style="{DynamicResource LogoStyle}"/>
-                <StackPanel Background="{StaticResource MainBlue}"
-                            Grid.Row="1"
+            <materialDesign:Card UniformCornerRadius="15"
+                                 Background="{StaticResource MainBlue}">
+                <StackPanel Margin="10 0 0 0"
+                            Background="{StaticResource MainBlue}"
+                            Grid.RowSpan="2"
                             Orientation="Vertical">
+                    <Image Style="{DynamicResource WhiteLogoStyle}"/>
                     <Button x:Name="DepotBtn"
                             Style="{DynamicResource ButtonForMenuStyle}"
                             Margin="10 70 10 10"
@@ -92,7 +90,8 @@
                         </Button.Content>
                     </Button>
                 </StackPanel>
-            </Grid>
+            </materialDesign:Card>
+           
             <Grid Grid.Column="1"
                   Margin="10">
                 <Grid.RowDefinitions>

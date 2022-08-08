@@ -28,7 +28,7 @@ namespace MetroApp.PageFolder.StaffPageFolder
         {
             InitializeComponent();
             staff = DBEntities.GetContext().Staff.FirstOrDefault(s => s.IdStaff == VariableClass.IdStaff);
-            DateOfBirthDp.SelectedDate = staff.DateOfBitrh;
+            DateOfBirthDp.SelectedDate = staff.DateOfBirth;
             DataContext = staff;
         }
 
@@ -73,7 +73,7 @@ namespace MetroApp.PageFolder.StaffPageFolder
             staff.Surname = SurnameTb.Text;
             staff.NameStaff = NameTb.Text;
             staff.Patronymic = PatronymicTb.Text;
-            staff.DateOfBitrh = (DateTime)DateOfBirthDp.SelectedDate;
+            staff.DateOfBirth = (DateTime)DateOfBirthDp.SelectedDate;
             DBEntities.GetContext().SaveChanges();
         }
 

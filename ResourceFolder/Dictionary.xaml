@@ -11,6 +11,10 @@
         <Setter Property="Margin" Value="10"/>
         <Setter Property="Source" Value="/ResourceFolder/ImageFolder/logo.png"/>
     </Style>
+    <Style x:Key="WhiteLogoStyle" TargetType="Image"
+           BasedOn="{StaticResource LogoStyle}">
+        <Setter Property="Source" Value="/ResourceFolder/ImageFolder/WhiteLogo.png" />
+    </Style>
     <Style x:Key="LabelLogoStyle" TargetType="Label"
            BasedOn="{StaticResource MaterialDesignLabel}">
         <Setter Property="FontSize" Value="22"/>
