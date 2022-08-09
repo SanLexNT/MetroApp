@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MetroApp.ClassFolder;
 using MetroApp.DataFolder;
+using Newtonsoft.Json;
 
 namespace MetroApp.WindowFolder
 {
@@ -22,19 +23,26 @@ namespace MetroApp.WindowFolder
     /// </summary>
     public partial class AuthorizationWindow : Window
     {
+        private string PATH = $"{Environment.CurrentDirectory}//data.json";
         public AuthorizationWindow()
         {
             InitializeComponent();
-            InitializeLogin();
+            InputAuto();
         }
-        private void InitializeLogin()
+        private void InputAuto()
         {
-            if (File.Exists(VariableClass.PATH))
+            if (File.Exists(PATH))
             {
-                using (StreamReader sr = new StreamReader(VariableClass.PATH))
+                User user;
+                using (var sr = File.OpenText(PATH))
                 {
-                    LoginTb.Text = sr.ReadLine();
+                    var fileText = sr.ReadToEnd();
+                    if (string.IsNullOrEmpty(fileText))
+                        return;
+                    user = JsonConvert.DeserializeObject<User>(fileText);
                 }
+                LoginTb.Text = user.Login;
+                PasswordPb.Password = PasswordTb.Text = user.Password;
                 RememberLoginChb.IsChecked = true;
             }
         }
@@ -99,7 +107,7 @@ namespace MetroApp.WindowFolder
                 else
                 {
                     if (RememberLoginChb.IsChecked == true)
-                        SaveLogin(user.Login);
+                        SaveData(user);
                     else
                         DeleteFile();
                     switch (user.IdRole)
@@ -131,17 +139,18 @@ namespace MetroApp.WindowFolder
                 MessageBoxClass.ErrorMessageBox(ex);
             }
         }
-        private void SaveLogin(string login)
+        private void SaveData(User user)
         {
-            using (StreamWriter sw = new StreamWriter(VariableClass.PATH, append: false))
+            using (var sw = File.CreateText(PATH))
             {
-                sw.WriteLine(login);
+                string output = JsonConvert.SerializeObject(user);
+                sw.WriteLine(output);
             }
         }
         private void DeleteFile()
         {
-            if (File.Exists(VariableClass.PATH))
-                File.Delete(VariableClass.PATH);
+            if (File.Exists(PATH))
+                File.Delete(PATH);
         }
 
     }

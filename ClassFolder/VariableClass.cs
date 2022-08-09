@@ -9,7 +9,7 @@ namespace MetroApp.ClassFolder
     public static class VariableClass
     {
         public static bool IsAccepted { get; set; }
-        public const string PATH = "data.txt";
+        
         public static int IdStaff { get; set; }
         public static int IdDepot { get; set; }
         public static string SelectedFileName { get; set; }

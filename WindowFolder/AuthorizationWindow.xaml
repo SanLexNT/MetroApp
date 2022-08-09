@@ -86,7 +86,7 @@
             <CheckBox x:Name="RememberLoginChb"
                       Style="{DynamicResource CheckBoxStyle}"
                       Grid.Row="5"
-                      Content="Запомнить логин?"/>
+                      Content="Автозаполнение"/>
             <Button x:Name="EnterBtn"
                     Content="Войти"
                     Style="{DynamicResource MainButtonStyle}"
